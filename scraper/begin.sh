@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Dosyaya kendine çalıştırma yetkisi ver
-chmod +x "$0"
+#!/bin/bash
+if [ ! -f "/home/appuser/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver" ]; then
+    echo "ChromeDriver not found, installing..."
+    curl -O https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+    unzip chromedriver_linux64.zip -d /home/appuser/.wdm/drivers/chromedriver/linux64/114.0.5735.90/
+    chmod +x /home/appuser/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver
+fi
 
 # Paket listesini güncelle
 sudo apt-get update
