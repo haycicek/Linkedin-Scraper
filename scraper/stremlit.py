@@ -1,4 +1,3 @@
-import subprocess
 import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -18,11 +17,11 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from textwrap import wrap
 
-subprocess.run(['sh', './begin.sh'])
-
 # Airtable bilgileri hesaba göre düzenlenecek.
-AIRTABLE_BASE_ID = 'appCIHUNjRGLIw3uh'
-AIRTABLE_YOUR_SECRET_API_TOKEN = 'patb6iSnO3urlCr64.edde605fb847c133eb55fbdd6907b050eb3a31198f16fecee3b781d5dd751642'
+# BASE_ID için> Help> API Documentation
+# Token için> Builder Hub>Personel Access Token>Create New Token>All Scopes seçildi>Table'ın ait olduğu Base seçildi.
+AIRTABLE_BASE_ID = 'YOUR_AIRTABLE_BASE_ID'
+AIRTABLE_YOUR_SECRET_API_TOKEN = 'YOUR_AIRTABLE_SECRET_API_TOKEN'
 AIRTABLE_TABLE_NAME = 'py-to-airtable'
 
 endpoint = f'https://api.airtable.com/v0/{AIRTABLE_BASE_ID}/{AIRTABLE_TABLE_NAME}'
@@ -141,9 +140,9 @@ def create_pdf(company_info):
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
 
-    pdfmetrics.registerFont(TTFont('DejaVuSans', "DejaVuSans.ttf"))
+    pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
 
-    logo_path = 'logo.png'
+    logo_path = 'logo-2.png'
     logo_width = 150
     logo_height = 75
     logo_margin = 30
@@ -224,7 +223,7 @@ def main():
 
             st.write("Şirket Bilgileri:")
             st.write(f"İsim: {company_info['Name']}")
-            st.write(f"Linkedin: {company_info['URL']}")
+            st.write(f"Linledin: {company_info['URL']}")
             st.write(f"Açıklama: {company_info['Description']}")
             st.write(f"Web Sitesi: {company_info['Website']}")
             st.write(f"Alan: {company_info['Area']}")
